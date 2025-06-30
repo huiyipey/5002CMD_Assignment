@@ -6,8 +6,8 @@ from collections import defaultdict
 # accept IC as parameter
 # use appropriate folding technique
 def folding_hash(ic, table_size):
-    if len(ic) != 12:
-        raise ValueError("IC number must be 12 digits long.")
+    # if len(ic) != 12:
+    #     raise ValueError("IC number must be 12 digits long.")
 
     total = 0
     # Split into 4 digit per parts
