@@ -58,7 +58,7 @@ def generate_ic():
     # return random.randint(000000000000, 999999999999)
 
 def insert_to_table(table_size, rounds):
-    # total_collisions_per_round=[]
+    total_collisions_per_round=[]
     total_collisions = 0
     collision_rate = 0
     # print(f"Hash Table Size: {table_size}")
@@ -88,29 +88,44 @@ def insert_to_table(table_size, rounds):
                 print(f"table[{i}]")
 
         total_collisions += collisions
-        collision_rate = (total_collisions / (1000 * 10)) * 100
-        print(f"Round {r+1}: {collisions} collisions")
-        # total_collisions_per_round.append(collisions)
-    print(f"Average collisions: {total_collisions / rounds:.2f}")
-    return collision_rate
+        # print(f"Round {r+1}: {collisions} collisions")
+        total_collisions_per_round.append(collisions)
+
+    collision_rate = (total_collisions / (1000 * 10)) * 100
+    # print(f"Average collisions: {total_collisions / rounds:.2f}")
+    return {'round_collisions': total_collisions_per_round,
+        'average_collisions': total_collisions / rounds,
+        'collision_rate': collision_rate
+    }
     # avg_collisions = sum(total_collisions_per_round) / rounds
     # return total_collisions_per_round, avg_collisions
 
 def main():
     print("Hash Table with size 1009:")
-    col_1009 = insert_to_table(1009, 10)
+    result_1009 = insert_to_table(1009, 10)
     # col_1009, avg_1009 = insert_to_table(1009)
     # print("Collisions per round:", col_1009)
     # print("Average collisions:", avg_1009)
 
     print("\nHash Table with size 2003:")
-    col_2003 = insert_to_table(2003, 10)
+    result_2003 = insert_to_table(2003, 10)
     # col_2003, avg_2003 = insert_to_table(2003)
     # print("Collisions per round:", col_2003)
     # print("Average collisions:", avg_2003)
 
-    print("\nCollision Rate for Smaller Hash Table: {:.2f} %".format(col_1009))
-    print("Collision Rate for Bigger Hash Table: {:.2f} %".format(col_2003))
+    print("\nResults for Hash Table size 1009:")
+    for r in range(10):
+        print(f"Round {r + 1}: {result_1009['round_collisions'][r]} collisions")
+    print(f"Average collisions: {result_1009['average_collisions']:.2f}")
+
+    print("\nResults for Hash Table size 2003:")
+    for r in range(10):
+        print(f"Round {r+1}: {result_2003['round_collisions'][r]} collisions")
+    print(f"Average collisions: {result_2003['average_collisions']:.2f}")
+
+    print("\nCollision Rate Comparison:")
+    print(f"Collision Rate for Smaller Hash Table (1009): {result_1009['collision_rate']:.2f} %")
+    print(f"Collision Rate for Bigger Hash Table (2003): {result_2003['collision_rate']:.2f} %")
 
 if __name__ == "__main__":
     main()
