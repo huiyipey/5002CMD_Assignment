@@ -2,12 +2,12 @@ class Graph:
     def __init__(self):
         self.adj_list = dict()
         self.vertices = []
-        self.vertex_indices = {}
+        # self.vertex_indices = {}
 
     def add_vertex(self, vertex):
         if vertex not in self.vertices:
             self.vertices.append(vertex)
-            self.vertex_indices[vertex] = len(self.vertices) - 1
+            # self.vertex_indices[vertex] = len(self.vertices) - 1
             self.adj_list[vertex] = []  # Initialize with empty list
 
     def add_edge(self, from_vertex, to_vertex):
