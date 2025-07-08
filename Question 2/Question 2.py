@@ -354,7 +354,10 @@ def main():
 
             else:
                 # Determine valid range for the error message
-                valid_range = "1-5,7" if len(app.people) >= 10 else "1-7"
+                if len(app.people) >= 10:
+                    valid_range = "1-5,7"
+                else:
+                    valid_range = "1-7"
                 print(f"Invalid choice! Please enter a number between {valid_range}")
 
         except Exception as e:
